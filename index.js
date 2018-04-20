@@ -11,7 +11,7 @@ server.use(bodyParser.json());
 
 server.post('/get-employees', (req, res) => {
 
-    const reqUrl = 'http://localhost:9200/users/_search';
+    const reqUrl = 'http://bf52c5a8.ngrok.io/users/_search';
     http.get(reqUrl, (responseFromAPI) => {
         let completeResponse = '';
         responseFromAPI.on('data', (chunk) => {
