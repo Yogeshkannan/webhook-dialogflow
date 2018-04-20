@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const http = require('http');
+const https = require('https');
 
 const server = express();
 server.use(bodyParser.urlencoded({
@@ -12,7 +12,7 @@ server.use(bodyParser.json());
 server.post('/get-employees', (req, res) => {
 
     const reqUrl = 'https://reqres.in/api/users/2';
-    http.get(reqUrl, (responseFromAPI) => {
+    https.get(reqUrl, (responseFromAPI) => {
         let completeResponse = '';
         responseFromAPI.on('data', (chunk) => {
             completeResponse += chunk;
