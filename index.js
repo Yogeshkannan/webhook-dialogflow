@@ -12,7 +12,7 @@ server.use(bodyParser.json());
 server.post('/getEmployees', (req, res) => {
 
     const reqUrl = 'https://reqres.in/api/users/2';
-    request(reqUrl, function(error, responseFromAPI, body) => {
+    request(reqUrl, function(error, responseFromAPI, body) {
 		if (error) {
 			console.log("ERR:", error);
 		} else {
