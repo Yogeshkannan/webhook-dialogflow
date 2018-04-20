@@ -16,9 +16,14 @@ server.post('/getEmployees', (req, res) => {
 		if (error) {
 			console.log("ERR:", error);
 		} else {
-			const employees = JSON.parse(body);
-			console.log("Employeesss-->", employees)
-            let dataToSend = "Employees list coming soon... bye"
+			var employees = JSON.parse(body).hits.hits;
+			var employeeList = [];
+			
+			for (var i = 0; i < employees.length; i++) {
+				employeeList.push(employees[i]._source.name);
+			}
+		
+            let dataToSend = "Employees are " + employeeList.toString();
 
             return res.json({
                 speech: dataToSend,
