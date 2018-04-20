@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const https = require('https');
+const request = require('request');
 
 const server = express();
 server.use(bodyParser.urlencoded({
@@ -9,16 +9,14 @@ server.use(bodyParser.urlencoded({
 
 server.use(bodyParser.json());
 
-server.post('/get-employees', (req, res) => {
+server.post('/getEmployees', (req, res) => {
 
     const reqUrl = 'https://reqres.in/api/users/2';
-    https.get(reqUrl, (responseFromAPI) => {
-        let completeResponse = '';
-        responseFromAPI.on('data', (chunk) => {
-            completeResponse += chunk;
-        });
-        responseFromAPI.on('end', () => {
-            const employees = JSON.parse(completeResponse);
+    request(reqUrl, function(error, responseFromAPI, body) => {
+		if (error) {
+			console.log("ERR:", error);
+		} else {
+			const employees = JSON.parse(body);
 			//console.log("Employeesss-->", employees)
             let dataToSend = "Employees list coming soon..."
 
@@ -27,13 +25,8 @@ server.post('/get-employees', (req, res) => {
                 displayText: dataToSend,
                 source: 'get-employees'
             });
-        });
-    }, (error) => {
-        return res.json({
-            speech: 'Something went wrong!',
-            displayText: 'Something went wrong!',
-            source: 'get-employees'
-        });
+		}
+        
     });
 });
 
