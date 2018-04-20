@@ -11,7 +11,7 @@ server.use(bodyParser.json());
 
 server.post('/get-employees', (req, res) => {
 
-    const reqUrl = 'http://bf52c5a8.ngrok.io/users/_search';
+    const reqUrl = 'https://reqres.in/api/users/2';
     http.get(reqUrl, (responseFromAPI) => {
         let completeResponse = '';
         responseFromAPI.on('data', (chunk) => {
@@ -19,7 +19,7 @@ server.post('/get-employees', (req, res) => {
         });
         responseFromAPI.on('end', () => {
             const employees = JSON.parse(completeResponse);
-			console.log("Employeesss-->", employees)
+			//console.log("Employeesss-->", employees)
             let dataToSend = "Employees list coming soon..."
 
             return res.json({
